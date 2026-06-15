@@ -1,0 +1,46 @@
+# Default Codex command safety rules for this repository.
+
+prefix_rule(
+  pattern=[["pwd"], ["uname"], ["sw_vers"]],
+  decision="allow",
+)
+
+prefix_rule(
+  pattern=[["ls"], ["find"], ["rg"], ["sed"], ["cat"], ["head"], ["tail"], ["wc"], ["stat"], ["file"], ["command", "-v"], ["which"], ["type"]],
+  decision="allow",
+)
+
+prefix_rule(
+  pattern=[["git", "status"], ["git", "diff"], ["git", "log"], ["git", "show"], ["git", "branch"], ["git", "rev-parse"]],
+  decision="allow",
+)
+
+prefix_rule(
+  pattern=[["git", "add"], ["git", "commit"], ["git", "restore"], ["git", "switch"], ["git", "checkout"], ["git", "merge"], ["git", "rebase"], ["git", "reset"], ["git", "clean"]],
+  decision="prompt",
+)
+
+prefix_rule(
+  pattern=[["cp"], ["mv"], ["chmod"], ["chown"], ["ln"], ["mkdir"], ["touch"], ["tee"], ["sed", "-i"], ["perl", "-i"]],
+  decision="prompt",
+)
+
+prefix_rule(
+  pattern=[["python3"], ["node"], ["npm"], ["npx"], ["bash"], ["sh"]],
+  decision="prompt",
+)
+
+prefix_rule(
+  pattern=[["rm"], ["rmdir"], ["del"], ["Remove-Item"]],
+  decision="forbidden",
+)
+
+prefix_rule(
+  pattern=[["git", "push"], ["git", "push", "--force"], ["git", "remote"]],
+  decision="forbidden",
+)
+
+prefix_rule(
+  pattern=[["cat", ".env"], ["head", ".env"], ["tail", ".env"], ["sed", ".env"], ["rg", ".env"], ["grep", ".env"], ["less", ".env"], ["more", ".env"]],
+  decision="forbidden",
+)
